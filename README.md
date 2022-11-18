@@ -1,5 +1,4 @@
 Project Setup
-
 1) Jest setup for tests:
 	
 	npm i jest --save-dev
@@ -18,4 +17,4 @@ Project Setup
 
 Web App
 
-https://tic-tac-toe-kss.netlify.app/
+https://tic-tac-toe-kss.herokuapp.com/
