@@ -9,7 +9,7 @@ function displayText(){
 
     if(document.getElementById("msg")) {
         document.getElementById("msg").innerHTML = "Clicked"
-    };
+    }
 }  
 
 /**
