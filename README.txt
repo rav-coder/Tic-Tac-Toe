@@ -6,10 +6,6 @@ Jest setup for tests:
 
 	npm i jest-environment-jsdom --save-dev
 
-JS Doc
-	npm install -g jsdoc
-	
-	 jsdoc index.js
 
 Run tests: 
 
@@ -17,6 +13,21 @@ Run tests:
 	
 	jest --coverage
 	
+
+Lint:
+	npm install eslint -DE
+	
+	
+To run lint:
+	npm run lint
+
+
+JS Doc
+	npm install -g jsdoc
+	
+	 jsdoc index.js
+	
+
 Web App
 
 	https://tic-tac-toe-kss.herokuapp.com/
