@@ -1,5 +1,4 @@
-Project Setup
-1) Jest setup for tests:
+Jest setup for tests:
 	
 	npm i jest --save-dev
 
@@ -7,14 +6,17 @@ Project Setup
 
 	npm i jest-environment-jsdom --save-dev
 
+JS Doc
+	npm install -g jsdoc
+	
+	 jsdoc index.js
 
-2) Run tests: 
+Run tests: 
 
 	jest
 	
-    jest --coverage
-    
-
+	jest --coverage
+	
 Web App
 
-https://tic-tac-toe-kss.herokuapp.com/
+	https://tic-tac-toe-kss.herokuapp.com/
