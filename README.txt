@@ -16,7 +16,7 @@ Run tests:
 
 Lint:
 	npm install eslint -DE
-	
+	// npm init @eslint/config 
 	
 To run lint:
 	npm run lint
