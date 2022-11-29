@@ -13,10 +13,10 @@ function displayText(){
 }  
 
 /**
- * 
- * @param {*} a 
- * @param {*} b 
- * @returns 
+ *  asdfadsf
+ * @param {*} a dsaf
+ * @param {*} b asdf
+ * @returns adsf
  */
 function sum(a, b) {
   return a + b;
