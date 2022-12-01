@@ -3,8 +3,11 @@
 const CIRCLE = 'o';
 const CROSS = 'x';
 
-// get all the 9 canvases/boxes present in the board
-const canvasItems = document.querySelectorAll('[canvas-data]')
+// // get all the 9 canvases/boxes present in the board
+// const canvasItems = document.querySelectorAll(".canvas-data")
+// console.log(canvasItems);
+// const canvasItems = document.querySelectorAll('div')
+var canvasItems;
 
 // conditions that need to be fulfilled to win the game
 const GAME_WIN_CONDITION = [
@@ -65,15 +68,43 @@ class BoardSingleton {
     footerText.appendChild(footer);
     document.getElementsByTagName("body")[0].appendChild(footerText);
 
+    // create board and box elements and append box to the board
+    var board = document.createElement("div");
+    board.setAttribute("id", "board");
+    board.classList.add("board");
+    var box;
+    var canvas;
+    // var canvasClose = "</canvas>";
+
+    for (var x=0; x<9; x++) {
+      var string = "canvas" + x;
+      box = document.createElement("box");
+      box.classList.add("box");
+      board.appendChild(box);
+
+      canvas = document.createElement("canvas");
+      canvas.classList.add("canvas-data");
+      canvas.setAttribute("id", string);
+      canvas.style.height="100px";
+      canvas.style.width="100px";
+      
+      box.appendChild(canvas);
+    }
+
+    document.getElementsByTagName("body")[0].appendChild(board);
+
     //display the board and add some custom css attributes
     if(document.getElementById("board")){
       var board = document.getElementById("board");
+      // board = document.getElementById("board");
       board.style.paddingTop = "20px";
       board.style.paddingBottom = "20px";
       board.style.visibility = "visible";
     }
+
   }
 }
+
 
 /**
  * Holds the blueprint for a shape.
@@ -176,7 +207,9 @@ function loadGame(){
 
   // call the singleton board class to draw the board
   (new BoardSingleton()).drawBoard();
-
+  
+  canvasItems = document.querySelectorAll(".canvas-data")
+  console.log(canvasItems);
   //reset total drawn shapes
   totalDrawnShapes = 0;
 
@@ -300,15 +333,3 @@ function gameDrawn(){
 function switchShape(){
   crossCurrentShape = !crossCurrentShape;
 }
-
-/**
- *  asdfadsf
- * @param {*} a dsaf
- * @param {*} b asdf
- * @returns adsf
- */
- function sum(a, b) {
-  return a + b;
-}
-
-module.exports = sum;

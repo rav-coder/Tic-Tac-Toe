@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +9,16 @@
     <script type="text/javascript" src="index.js" defer></script>
     <title>Tic Tac Toe</title>
 </head>
+
 <body>
     <div class="main-title"> Tic Tac Toe</div>
-    <div class="board" id="board" style="visibility:hidden">
+    
+    <!-- <div class="board" id="board" style="visibility:visible">
+        <div class="box" id="box"></div>
+        <canvas id="box" style="visibility: visible;"></canvas>
+    </div> -->
+    
+    <!-- <div class="board" id="board" style="visibility:hidden">
         <div class="box">
             <canvas id="canvas0" height="100" width="100" canvas-data>
             </canvas>
@@ -47,10 +55,12 @@
             <canvas id="canvas8" height="100" width="100" canvas-data>
             </canvas>
         </div>
-      </div>
-    <div style="text-align: center;" >
+    </div> -->
+
+    <div style="text-align: center;">
         <div id="msg"></div>
-        <button type="button" id="restart-btn"  onClick="window.location.reload();"><span>Restart</span></button>
+        <button type="button" id="restart-btn" onClick="window.location.reload();"><span>Restart</span></button>
     </div>
 </body>
+
 </html>
