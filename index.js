@@ -3,22 +3,18 @@
 const CIRCLE = 'o';
 const CROSS = 'x';
 
-// // get all the 9 canvases/boxes present in the board
-// const canvasItems = document.querySelectorAll(".canvas-data")
-// console.log(canvasItems);
-// const canvasItems = document.querySelectorAll('div')
 var canvasItems;
 
 // conditions that need to be fulfilled to win the game
 const GAME_WIN_CONDITION = [
-  [0, 3, 6],
-  [0, 1, 2], // when the same shape is drawn on the first three horizontal canvases
-  [0, 4, 8],
-  [1, 4, 7],
-  [2, 5, 8],
-  [2, 4, 6],
-  [3, 4, 5],
-  [6, 7, 8],
+  [0, 3, 6], // left column win condition
+  [0, 1, 2], // top row win condition
+  [0, 4, 8], // diagonal from top left to bottom right win condition
+  [1, 4, 7], // middle column win condition
+  [2, 5, 8], // right column win condition
+  [2, 4, 6], // diagonal from top right to bottom left win condition
+  [3, 4, 5], // middle row win condition
+  [6, 7, 8], // bottom row win condition
 ]
 
 //holds the number of shapes drawn by the players
@@ -74,8 +70,8 @@ class BoardSingleton {
     board.classList.add("board");
     var box;
     var canvas;
-    // var canvasClose = "</canvas>";
 
+    // loop to create 9 canvas and apend them to each box
     for (var x=0; x<9; x++) {
       var string = "canvas" + x;
       box = document.createElement("div");
@@ -92,12 +88,9 @@ class BoardSingleton {
     }
     document.getElementById("board-wrap").appendChild(board);
 
-    //document.getElementsByTagName("body")[0].appendChild(board);
-
     //display the board and add some custom css attributes
     if(document.getElementById("board")){
       var board = document.getElementById("board");
-      // board = document.getElementById("board");
       board.style.paddingTop = "20px";
       board.style.paddingBottom = "20px";
       board.style.visibility = "visible";
@@ -299,6 +292,7 @@ function addShape(canvas, currentShape){
       //increment the total number of shapes drawn
       totalDrawnShapes++;
   }
+  // error handling in case the shape cannot be made
   else{
     console.log("Invalid shape to draw");
     return 0;
@@ -306,6 +300,7 @@ function addShape(canvas, currentShape){
   
 }
 
+// function to determine if the game is won 
 function gameWon(currentShape){
     
   // loop all the win patterns specified in the array to see if the current pattern matches
@@ -321,6 +316,7 @@ function gameWon(currentShape){
   })
 }
 
+// function to determine if the game ends in a draw
 function gameDrawn(){
 
   // if all 9 canvases have been filled, the game is drawn
