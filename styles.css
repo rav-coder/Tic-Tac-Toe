@@ -14,6 +14,7 @@ p{
 /** "Tic-tac-toe" header styling */
 .main-title{
     color:firebrick;
+    /* color:blue; */
     text-align: center;
     font-size: 5rem;
 }
@@ -42,7 +43,7 @@ p{
 }
 
 
-/** Styling for restart button*/
+/** Styling for restart button */
 #restart-btn{
 	padding: 10px 40px;
 	font-size: 18px;
@@ -59,7 +60,7 @@ p{
 /** Styling for win,draw, turn text*/
 #msg{
 	font-size: 25px;
-	color: black;
+	color: #7bae37;
     border-radius: 5px;
 	border-bottom: 5px solid firebrick;
     padding-bottom: 10px;

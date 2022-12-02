@@ -3,6 +3,9 @@
 const CIRCLE = 'o';
 const CROSS = 'x';
 
+// constant for the total box/canvas for a tic tac toe game
+const totalNeededShapes = 9;
+
 var canvasItems;
 
 // conditions that need to be fulfilled to win the game
@@ -29,8 +32,9 @@ let crossCurrentShape
 class BoardSingleton {
 
   /**
+   * Create a board for the tic-tac-toe game.
    * 
-   * @returns creates and returns only one instance
+   * @returns returns only one instance of board
    */
   constructor() {
       const instance = this.constructor.instance;
@@ -45,7 +49,37 @@ class BoardSingleton {
   /**
    * Creates some elements seen on the page including some attrributes for a board.
    */
-  drawBoard() {
+  drawBoard(totalNeededShapes) {
+
+    // create board and box elements and append box to the board
+    var board = document.createElement("div");
+    board.setAttribute("id", "board");
+    board.classList.add("board");
+    board.style.paddingTop = "20px";
+    board.style.paddingBottom = "20px";
+    var box;
+    var canvas;
+
+    // loop to create 9 canvas and apend them to each box
+    for (var x=0; x<totalNeededShapes; x++) {
+      var string = "canvas" + x;
+      box = document.createElement("div");
+      box.classList.add("box");
+      board.appendChild(box);
+
+      canvas = document.createElement("canvas");
+      canvas.classList.add("canvas-data");
+      canvas.setAttribute("id", string);
+      canvas.height="100";
+      canvas.width="100";
+      
+      box.appendChild(canvas);
+    }
+
+    // display the board by adding it a div in the body of the html
+    if(document.getElementById("board-wrap"))
+      document.getElementById("board-wrap").appendChild(board);
+
     // create the div element and apply some styles to it
     var footerText = document.createElement("div");
     footerText.style.paddingTop = "10px";
@@ -63,38 +97,6 @@ class BoardSingleton {
     footer.appendChild(text);
     footerText.appendChild(footer);
     document.getElementsByTagName("body")[0].appendChild(footerText);
-
-    // create board and box elements and append box to the board
-    var board = document.createElement("div");
-    board.setAttribute("id", "board");
-    board.classList.add("board");
-    var box;
-    var canvas;
-
-    // loop to create 9 canvas and apend them to each box
-    for (var x=0; x<9; x++) {
-      var string = "canvas" + x;
-      box = document.createElement("div");
-      box.classList.add("box");
-      board.appendChild(box);
-
-      canvas = document.createElement("canvas");
-      canvas.classList.add("canvas-data");
-      canvas.setAttribute("id", string);
-      canvas.height="100";
-      canvas.width="100";
-      
-      box.appendChild(canvas);
-    }
-    document.getElementById("board-wrap").appendChild(board);
-
-    //display the board and add some custom css attributes
-    if(document.getElementById("board")){
-      var board = document.getElementById("board");
-      board.style.paddingTop = "20px";
-      board.style.paddingBottom = "20px";
-      board.style.visibility = "visible";
-    }
 
   }
 }
@@ -147,6 +149,7 @@ class Cross extends Shape{
     super(canvasId)
   }
 
+    /* istanbul ignore next */
   /**
    * Draw the cross shape using two lines by specifying the start and end coordinates for a line.
    */
@@ -197,13 +200,16 @@ class Circle extends Shape{
 
 loadGame()
 
+/**
+ * Loads the board for the game and adds mouse click event to a box
+ */
 function loadGame(){
 
   // call the singleton board class to draw the board
-  (new BoardSingleton()).drawBoard();
+  (new BoardSingleton()).drawBoard(totalNeededShapes);
   
   canvasItems = document.querySelectorAll(".canvas-data")
-  console.log(canvasItems);
+
   //reset total drawn shapes
   totalDrawnShapes = 0;
 
@@ -218,52 +224,69 @@ function loadGame(){
   })
 }
 
-
-// runs after a canvas/box is clicked
+/* istanbul ignore next */
+/**
+ * Runs after a canvas/box is clicked
+ * 
+ * @param {*} e event associated with a click
+ */
 function handleClick(e) {
   
-  // make the current canvas the target
-  const canvas = e.target
+  if(e != null){
+    // make the current canvas the target
+    const canvas = e.target
 
-  // select the correct shape based on turn (cross and circle's turn interchanging)
-  let currentShape = '';
-  if(crossCurrentShape) currentShape = CROSS;
-  else currentShape = CIRCLE;
+    // select the correct shape based on turn (cross and circle's turn interchanging)
+    let currentShape = '';
+    if(crossCurrentShape) currentShape = CROSS;
+    else currentShape = CIRCLE;
 
-  // send the current canvas and shape information
-  addShape(canvas, currentShape)
+    // send the current canvas and shape information
+    addShape(canvas, currentShape)
 
-  var msg = document.getElementById("msg");
+    var msg = document.getElementById("msg");
 
-  // game win or draw condition
-  if(gameWon(currentShape)){
-    console.log("win");
+    // game win or draw condition
+    if(gameWon(currentShape, canvasItems)){
+      console.log("win");
 
-    // display win message
-    if(crossCurrentShape) msg.innerText = 'X Wins!'
-    else msg.innerText = 'O Wins!'
+      // display win message
+      if(crossCurrentShape) msg.innerText = 'X Wins!'
+      else msg.innerText = 'O Wins!'
 
-    // disable click event on the board after win
-    document.getElementById('board').style.pointerEvents = 'none';
+      // disable click event on the board after win
+      document.getElementById('board').style.pointerEvents = 'none';
+      
+    } else if (gameDrawn(totalDrawnShapes)){
+      console.log("draw");
+
+      // display draw message
+      msg.innerText = 'Draw!'
+    } 
     
-  } else if (gameDrawn()){
-    console.log("draw");
+    //if game neither won or drawn, the game is ongoing
+    else{
+      // display the corresponding players turn
+      if(crossCurrentShape) msg.innerText = 'O turn'
+      else msg.innerText = 'X turn'
 
-    // display draw message
-    msg.innerText = 'Draw!'
-  } else{
+    }
 
-    // display the corresponding players turn
-    if(crossCurrentShape) msg.innerText = 'O turn'
-    else msg.innerText = 'X turn'
-
+    // when a new canvas is clicked switch the shapes
+    crossCurrentShape = switchShape(crossCurrentShape)
   }
-
-  // when a new canvas is clicked switch the shapes
-  switchShape()
+  else return 0;
 
 }
 
+/* istanbul ignore next */
+/**
+ * Display a circle or a cross on a new canvas that is clicked
+ * 
+ * @param {*} canvas the new canvas clicked on
+ * @param {*} currentShape the shape for the current turn
+ * @returns 0 if an invalid shape is found
+ */
 function addShape(canvas, currentShape){
   
   //draw the correct shape on the clicked canvas
@@ -300,33 +323,61 @@ function addShape(canvas, currentShape){
   
 }
 
-// function to determine if the game is won 
-function gameWon(currentShape){
+/**
+ * Determine if the game is won 
+ * 
+ * @param {*} currentShape the shape for the current turn
+ * @param {*} canvasItems the array containing the canvases
+ * 
+ * @returns true if game is won, false if no winner
+ */
+function gameWon(currentShape, canvasItems){
     
-  // loop all the win patterns specified in the array to see if the current pattern matches
-  return GAME_WIN_CONDITION.some(winPattern => {
+  if(canvasItems){
+      // loop all the win patterns specified in the array to see if the current pattern matches
+    return GAME_WIN_CONDITION.some(winPattern => {
 
-    // loop the indexes for a win pattern
-    return winPattern.every(index => {
+      // loop the indexes for a win pattern
+      return winPattern.every(index => {
 
-      // check if the current indexes have the same shape for the win pattern
-      // check if the winning indexes contain the class name of either all 'o' or 'x'
-      return canvasItems[index].classList.contains(currentShape)
+        // check if the current indexes have the same shape for the win pattern
+        // check if the winning indexes contain the class name of either all 'o' or 'x'
+        return canvasItems[index].classList.contains(currentShape);
+      })
     })
-  })
+  }
+
 }
 
-// function to determine if the game ends in a draw
-function gameDrawn(){
+/**
+ * Determine if the game ends in a draw.
+ * 
+ * @param {*} totalDrawnShapes total number of boxes currenttly filled
+ * 
+ * @returns true if game is drawn, false otherwise
+ */
+function gameDrawn(totalDrawnShapes){
 
   // if all 9 canvases have been filled, the game is drawn
-  if(totalDrawnShapes == 9){
+  if(totalDrawnShapes == totalNeededShapes){
     return true;
   }
+  
   else return false;
 }
 
-// switch the current shape
-function switchShape(){
-  crossCurrentShape = !crossCurrentShape;
+/**
+ * Switch the current shape.
+ * 
+ * @param {*} crossCurrentShape holds boolean for the current shape if cross
+ * 
+ * @returns the opposite T/F condition for a given state of a boolean
+ */
+function switchShape(crossCurrentShape){
+  return !crossCurrentShape;
 }
+
+/**
+ * export classes and methods for testing
+ */
+module.exports ={ BoardSingleton, Shape, Cross, Circle, loadGame ,handleClick, addShape, gameWon, gameDrawn, switchShape}
