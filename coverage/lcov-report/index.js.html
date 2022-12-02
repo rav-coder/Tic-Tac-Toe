@@ -444,7 +444,8 @@
 <a name='L379'></a><a href='#L379'>379</a>
 <a name='L380'></a><a href='#L380'>380</a>
 <a name='L381'></a><a href='#L381'>381</a>
-<a name='L382'></a><a href='#L382'>382</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -497,23 +498,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -542,6 +526,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -877,23 +879,6 @@ class BoardSingleton {
    * Creates some elements seen on the page including some attrributes for a board.
    */
   drawBoard(totalNeededShapes) {
-    // create the div element and apply some styles to it
-    var footerText = document.createElement("div");
-    footerText.style.paddingTop = "10px";
-    footerText.style.textAlign = "center";
-    footerText.style.fontSize = "18px";
-&nbsp;
-    //get the date and time the game loaded
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-&nbsp;
-    //add the footer text to a paragraph element and add it to the div and add div to the body
-    var footer = document.createElement("p");
-    var text = document.createTextNode("Game Loaded on: " + date + " " + time);
-    footer.appendChild(text);
-    footerText.appendChild(footer);
-    document.getElementsByTagName("body")[0].appendChild(footerText);
 &nbsp;
     // create board and box elements and append box to the board
     var board = document.createElement("div");
@@ -923,6 +908,24 @@ class BoardSingleton {
     // display the board by adding it a div in the body of the html
     if(document.getElementById("board-wrap"))
       document.getElementById("board-wrap").appendChild(board);
+&nbsp;
+    // create the div element and apply some styles to it
+    var footerText = document.createElement("div");
+    footerText.style.paddingTop = "10px";
+    footerText.style.textAlign = "center";
+    footerText.style.fontSize = "18px";
+&nbsp;
+    //get the date and time the game loaded
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+&nbsp;
+    //add the footer text to a paragraph element and add it to the div and add div to the body
+    var footer = document.createElement("p");
+    var text = document.createTextNode("Game Loaded on: " + date + " " + time);
+    footer.appendChild(text);
+    footerText.appendChild(footer);
+    document.getElementsByTagName("body")[0].appendChild(footerText);
 &nbsp;
   }
 }
@@ -1213,7 +1216,7 @@ module.exports ={ BoardSingleton, Shape, Cross, Circle, loadGame ,handleClick, a
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-12-02T22:59:47.891Z
+                at 2022-12-02T23:21:42.486Z
             </div>
         <script src="prettify.js"></script>
         <script>

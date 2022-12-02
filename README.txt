@@ -12,6 +12,9 @@ Run tests:
 	jest
 	
 	jest --coverage
+
+Install canvas:
+	npm install --save-dev canvas
 	
 
 Lint:
