@@ -78,20 +78,21 @@ class BoardSingleton {
 
     for (var x=0; x<9; x++) {
       var string = "canvas" + x;
-      box = document.createElement("box");
+      box = document.createElement("div");
       box.classList.add("box");
       board.appendChild(box);
 
       canvas = document.createElement("canvas");
       canvas.classList.add("canvas-data");
       canvas.setAttribute("id", string);
-      canvas.style.height="100px";
-      canvas.style.width="100px";
+      canvas.height="100";
+      canvas.width="100";
       
       box.appendChild(canvas);
     }
+    document.getElementById("board-wrap").appendChild(board);
 
-    document.getElementsByTagName("body")[0].appendChild(board);
+    //document.getElementsByTagName("body")[0].appendChild(board);
 
     //display the board and add some custom css attributes
     if(document.getElementById("board")){
