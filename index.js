@@ -317,7 +317,7 @@ function addShape(canvas, currentShape){
   }
   // error handling in case the shape cannot be made
   else{
-    console.log("Invalid shape to draw");
+    //console.log("Invalid shape to draw");
     return 0;
   }
   
