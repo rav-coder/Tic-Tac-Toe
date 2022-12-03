@@ -149,7 +149,6 @@ class Cross extends Shape{
     super(canvasId)
   }
 
-    /* istanbul ignore next */
   /**
    * Draw the cross shape using two lines by specifying the start and end coordinates for a line.
    */
@@ -224,7 +223,7 @@ function loadGame(){
   })
 }
 
-/* istanbul ignore next */
+
 /**
  * Runs after a canvas/box is clicked
  * 
@@ -246,6 +245,7 @@ function handleClick(e) {
 
     var msg = document.getElementById("msg");
 
+    /* istanbul ignore next */
     // game win or draw condition
     if(gameWon(currentShape, canvasItems)){
       console.log("win");
@@ -257,7 +257,8 @@ function handleClick(e) {
       // disable click event on the board after win
       document.getElementById('board').style.pointerEvents = 'none';
       
-    } else if (gameDrawn(totalDrawnShapes)){
+    } 
+    else if (gameDrawn(totalDrawnShapes)){
       console.log("draw");
 
       // display draw message
@@ -279,7 +280,7 @@ function handleClick(e) {
 
 }
 
-/* istanbul ignore next */
+
 /**
  * Display a circle or a cross on a new canvas that is clicked
  * 

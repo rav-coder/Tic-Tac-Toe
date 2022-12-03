@@ -183,23 +183,48 @@ test('Correctly adds a shape to a canvas', () => {
     </div>
   `
 
-  let currentShape = 'p';
+  let currentShape = 'o';
   let canvas = document.getElementById("canvas0");
 
   //act
   expect(canvas.id).toBe("canvas0");
+  TicTacToeModule.addShape(canvas, currentShape);
+
+  //expect(TicTacToeModule.addShape(canvas, currentShape)).toBe(0);
+
+  // teardown
+  canvas = undefined;
+  currentShape = undefined;
+
+  //setup
+  currentShape = 'x';
+  canvas = document.getElementById("canvas0");
+
+  //act
+  TicTacToeModule.addShape(canvas, currentShape);
+
+  // teardown
+  canvas = undefined;
+  currentShape = undefined;
+
+  //setup
+  currentShape = 'p';
+  canvas = document.getElementById("canvas0");
+
+  //act
   expect(TicTacToeModule.addShape(canvas, currentShape)).toBe(0);
 
   // teardown
   canvas = undefined;
   currentShape = undefined;
 
+
   });
 
 /**
-* Test for the loadGame method
+* Test for the loadGame and handleClick method
 */
-test('Correctly loads', () => {
+test('Game correctly loads and click event is handled properly.', () => {
 
   //setup
   TicTacToeModule.loadGame();
@@ -218,7 +243,15 @@ test('Correctly loads', () => {
   <body data-new-gr-c-s-check-loaded="14.1026.0" data-gr-ext-installed="">
     <div class="main-title"> Tic Tac Toe</div>
       <div id="board-wrap"><div id="board" class="board" style="padding-top: 20px; padding-bottom: 20px;">
-        <div class="box"><canvas class="canvas-data" id="canvas0" height="100" width="100"></canvas></div>
+        <div class="box"><canvas class="canvas-data x" id="canvas0" height="100" width="100"></canvas></div>
+        <div class="box"><canvas class="canvas-data x" id="canvas1" height="100" width="100"></canvas></div>
+        <div class="box"><canvas class="canvas-data x" id="canvas2" height="100" width="100"></canvas></div>
+        <div class="box"><canvas class="canvas-data" id="canvas3" height="100" width="100"></canvas></div>
+        <div class="box"><canvas class="canvas-data" id="canvas4" height="100" width="100"></canvas></div>
+        <div class="box"><canvas class="canvas-data" id="canvas5" height="100" width="100"></canvas></div>
+        <div class="box"><canvas class="canvas-data" id="canvas6" height="100" width="100"></canvas></div>
+        <div class="box"><canvas class="canvas-data" id="canvas7" height="100" width="100"></canvas></div>
+        <div class="box"><canvas class="canvas-data" id="canvas8" height="100" width="100"></canvas></div>
       </div>
     </div>
 
@@ -227,14 +260,24 @@ test('Correctly loads', () => {
         <button type="button" id="restart-btn" onclick="window.location.reload();"><span>Restart</span></button>
     </div>
   `
-
-  let canvas = document.getElementById("canvas");
+  let e = {target: document.getElementById("canvas0") }
+  //let canvas = document.getElementById("canvas0");
 
   //arrange
-  expect(TicTacToeModule.handleClick(canvas)).toBe(0);
+  TicTacToeModule.handleClick(e);
 
   //teardown
-  canvas = undefined;
+  e = undefined;
+
+  //setup
+  e = null;
+  //let canvas = document.getElementById("canvas0");
+
+  //arrange
+  expect(TicTacToeModule.handleClick(e)).toBe(0);
+
+  //teardown
+  e = undefined;
 
   });
 
