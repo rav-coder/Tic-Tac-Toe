@@ -33,4 +33,4 @@ JS Doc
 
 Web App
 
-	https://tic-tac-toe-kss.herokuapp.com/
+	https://final-project-de5taqq49-tic-tac-toe-2720.vercel.app/
