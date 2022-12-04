@@ -227,104 +227,14 @@ function loadGame(){
 
 
 /**
- * Runs after a canvas/box is clicked
  * 
- * @param {*} e event associated with a click
  */
-function handleClick(e) {
-  
-  if(e != null){
-    // make the current canvas the target
-    const canvas = e.target
+function displayText(){
 
-    // select the correct shape based on turn (cross and circle's turn interchanging)
-    let currentShape = '';
-    if(crossCurrentShape) currentShape = CROSS;
-    else currentShape = CIRCLE;
-
-    // send the current canvas and shape information
-    addShape(canvas, currentShape)
-
-    var msg = document.getElementById("msg");
-
-    /* istanbul ignore next */
-    // game win or draw condition
-    if(gameWon(currentShape, canvasItems)){
-      console.log("win");
-
-      // display win message
-      if(crossCurrentShape) msg.innerText = 'X Wins!'
-      else msg.innerText = 'O Wins!'
-
-      // disable click event on the board after win
-      document.getElementById('board').style.pointerEvents = 'none';
-      
-    } 
-    else if (gameDrawn(totalDrawnShapes)){
-      console.log("draw");
-
-      // display draw message
-      msg.innerText = 'Draw!'
-    } 
-    
-    //if game neither won or drawn, the game is ongoing
-    else{
-      // display the corresponding players turn
-      if(crossCurrentShape) msg.innerText = 'O turn'
-      else msg.innerText = 'X turn'
-
+    if(document.getElementById("msg")) {
+        document.getElementById("msg").innerHTML = "Clicked"
     }
-
-    // when a new canvas is clicked switch the shapes
-    crossCurrentShape = switchShape(crossCurrentShape)
-  }
-  else return 0;
-
-}
-
-
-/**
- * Display a circle or a cross on a new canvas that is clicked
- * 
- * @param {*} canvas the new canvas clicked on
- * @param {*} currentShape the shape for the current turn
- * @returns 0 if an invalid shape is found
- */
-function addShape(canvas, currentShape){
-  
-  //draw the correct shape on the clicked canvas
-  if(currentShape == CIRCLE){
-
-    const shape = new Circle(canvas.id);
-
-    if(shape instanceof Circle)
-      shape.draw();
-    
-    // add the class name 'o' on the selected canvas
-    canvas.classList.add(CIRCLE)
-    
-    //increment the total number of shapes drawn
-    totalDrawnShapes++;
-  }
-  else if(currentShape == CROSS){
-    const shape = new Cross(canvas.id);
-
-    if(shape instanceof Cross)
-      shape.draw();
-
-      // add the class name 'x' on the selected canvas
-      canvas.classList.add(CROSS)
-
-      //increment the total number of shapes drawn
-      totalDrawnShapes++;
-  }
-  // error handling in case the shape cannot be made
-  else{
-    //console.log("Invalid shape to draw");
-    return 0;
-  }
-  
-}
+}  
 
 /**
  * Determine if the game is won 
