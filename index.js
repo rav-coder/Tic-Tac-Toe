@@ -12,6 +12,18 @@ var canvasItems;
 //holds the number of shapes drawn by the players
 let totalDrawnShapes = 0;
 
+// conditions that need to be fulfilled to win the game
+const GAME_WIN_CONDITION = [
+    [0, 3, 6], // left column win condition
+    [0, 1, 2], // top row win condition
+    [0, 4, 8], // diagonal from top left to bottom right win condition
+    [1, 4, 7], // middle column win condition
+    [2, 5, 8], // right column win condition
+    [2, 4, 6], // diagonal from top right to bottom left win condition
+    [3, 4, 5], // middle row win condition
+    [6, 7, 8], // bottom row win condition
+  ]
+
 //boolean for checking if the current shape is a cross
 let crossCurrentShape
 
@@ -57,6 +69,32 @@ function loadGame(){
   
   else return false;
 }
+
+/**
+ * Determine if the game is won 
+ * 
+ * @param {*} currentShape the shape for the current turn
+ * @param {*} canvasItems the array containing the canvases
+ * 
+ * @returns true if game is won, false if no winner
+ */
+ function gameWon(currentShape, canvasItems){
+    
+    if(canvasItems){
+        // loop all the win patterns specified in the array to see if the current pattern matches
+      return GAME_WIN_CONDITION.some(winPattern => {
+  
+        // loop the indexes for a win pattern
+        return winPattern.every(index => {
+  
+          // check if the current indexes have the same shape for the win pattern
+          // check if the winning indexes contain the class name of either all 'o' or 'x'
+          return canvasItems[index].classList.contains(currentShape);
+        })
+      })
+    }
+  
+  }
 
 /**
  *  asdfadsf
