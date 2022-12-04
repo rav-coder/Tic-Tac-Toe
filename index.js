@@ -4,8 +4,9 @@ const CIRCLE = 'o';
 const CROSS = 'x';
 
 // constant for the total box/canvas for a tic tac toe game
-const totalNeededShapes = 9;
+const TOTALNEEDEDSHAPES = 9;
 
+// holds the canvas array
 var canvasItems;
 
 // conditions that need to be fulfilled to win the game
@@ -49,7 +50,7 @@ class BoardSingleton {
   /**
    * Creates some elements seen on the page including some attrributes for a board.
    */
-  drawBoard(totalNeededShapes) {
+  drawBoard(TOTALNEEDEDSHAPES) {
 
     // create board and box elements and append box to the board
     var board = document.createElement("div");
@@ -61,7 +62,7 @@ class BoardSingleton {
     var canvas;
 
     // loop to create 9 canvas and apend them to each box
-    for (var x=0; x<totalNeededShapes; x++) {
+    for (var x=0; x<TOTALNEEDEDSHAPES; x++) {
       var string = "canvas" + x;
       box = document.createElement("div");
       box.classList.add("box");
@@ -205,7 +206,7 @@ loadGame()
 function loadGame(){
 
   // call the singleton board class to draw the board
-  (new BoardSingleton()).drawBoard(totalNeededShapes);
+  (new BoardSingleton()).drawBoard(TOTALNEEDEDSHAPES);
   
   canvasItems = document.querySelectorAll(".canvas-data")
 
@@ -360,7 +361,7 @@ function gameWon(currentShape, canvasItems){
 function gameDrawn(totalDrawnShapes){
 
   // if all 9 canvases have been filled, the game is drawn
-  if(totalDrawnShapes == totalNeededShapes){
+  if(totalDrawnShapes == TOTALNEEDEDSHAPES){
     return true;
   }
   
