@@ -71,32 +71,6 @@ function loadGame(){
 }
 
 /**
- * Determine if the game is won 
- * 
- * @param {*} currentShape the shape for the current turn
- * @param {*} canvasItems the array containing the canvases
- * 
- * @returns true if game is won, false if no winner
- */
- function gameWon(currentShape, canvasItems){
-    
-    if(canvasItems){
-        // loop all the win patterns specified in the array to see if the current pattern matches
-      return GAME_WIN_CONDITION.some(winPattern => {
-  
-        // loop the indexes for a win pattern
-        return winPattern.every(index => {
-  
-          // check if the current indexes have the same shape for the win pattern
-          // check if the winning indexes contain the class name of either all 'o' or 'x'
-          return canvasItems[index].classList.contains(currentShape);
-        })
-      })
-    }
-  
-  }
-
-/**
  *  asdfadsf
  * @param {*} a dsaf
  * @param {*} b asdf
