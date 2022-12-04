@@ -14,7 +14,7 @@ p{
 /** "Tic-tac-toe" header styling */
 .main-title{
     color:firebrick;
-    /* color:blue; */
+    color:blue;
     text-align: center;
     font-size: 5rem;
 }
