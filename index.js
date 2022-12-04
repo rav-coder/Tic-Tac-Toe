@@ -198,6 +198,7 @@ class Circle extends Shape{
 
 }
 
+// called loadGame method for when page loads
 loadGame()
 
 /**
