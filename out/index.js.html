@@ -32,8 +32,9 @@ const CIRCLE = 'o';
 const CROSS = 'x';
 
 // constant for the total box/canvas for a tic tac toe game
-const totalNeededShapes = 9;
+const TOTALNEEDEDSHAPES = 9;
 
+// holds the canvas array
 var canvasItems;
 
 // conditions that need to be fulfilled to win the game
@@ -77,24 +78,7 @@ class BoardSingleton {
   /**
    * Creates some elements seen on the page including some attrributes for a board.
    */
-  drawBoard(totalNeededShapes) {
-    // create the div element and apply some styles to it
-    var footerText = document.createElement("div");
-    footerText.style.paddingTop = "10px";
-    footerText.style.textAlign = "center";
-    footerText.style.fontSize = "18px";
-
-    //get the date and time the game loaded
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-
-    //add the footer text to a paragraph element and add it to the div and add div to the body
-    var footer = document.createElement("p");
-    var text = document.createTextNode("Game Loaded on: " + date + " " + time);
-    footer.appendChild(text);
-    footerText.appendChild(footer);
-    document.getElementsByTagName("body")[0].appendChild(footerText);
+  drawBoard(TOTALNEEDEDSHAPES) {
 
     // create board and box elements and append box to the board
     var board = document.createElement("div");
@@ -106,7 +90,7 @@ class BoardSingleton {
     var canvas;
 
     // loop to create 9 canvas and apend them to each box
-    for (var x=0; x&lt;totalNeededShapes; x++) {
+    for (var x=0; x&lt;TOTALNEEDEDSHAPES; x++) {
       var string = "canvas" + x;
       box = document.createElement("div");
       box.classList.add("box");
@@ -124,6 +108,24 @@ class BoardSingleton {
     // display the board by adding it a div in the body of the html
     if(document.getElementById("board-wrap"))
       document.getElementById("board-wrap").appendChild(board);
+
+    // create the div element and apply some styles to it
+    var footerText = document.createElement("div");
+    footerText.style.paddingTop = "10px";
+    footerText.style.textAlign = "center";
+    footerText.style.fontSize = "18px";
+
+    //get the date and time the game loaded
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+    //add the footer text to a paragraph element and add it to the div and add div to the body
+    var footer = document.createElement("p");
+    var text = document.createTextNode("Game Loaded on: " + date + " " + time);
+    footer.appendChild(text);
+    footerText.appendChild(footer);
+    document.getElementsByTagName("body")[0].appendChild(footerText);
 
   }
 }
@@ -176,7 +178,6 @@ class Cross extends Shape{
     super(canvasId)
   }
 
-    /* istanbul ignore next */
   /**
    * Draw the cross shape using two lines by specifying the start and end coordinates for a line.
    */
@@ -225,6 +226,7 @@ class Circle extends Shape{
 
 }
 
+// called loadGame method for when page loads
 loadGame()
 
 /**
@@ -233,7 +235,7 @@ loadGame()
 function loadGame(){
 
   // call the singleton board class to draw the board
-  (new BoardSingleton()).drawBoard(totalNeededShapes);
+  (new BoardSingleton()).drawBoard(TOTALNEEDEDSHAPES);
   
   canvasItems = document.querySelectorAll(".canvas-data")
 
@@ -251,7 +253,7 @@ function loadGame(){
   })
 }
 
-/* istanbul ignore next */
+
 /**
  * Runs after a canvas/box is clicked
  * 
@@ -273,6 +275,7 @@ function handleClick(e) {
 
     var msg = document.getElementById("msg");
 
+    /* istanbul ignore next */
     // game win or draw condition
     if(gameWon(currentShape, canvasItems)){
       console.log("win");
@@ -284,7 +287,8 @@ function handleClick(e) {
       // disable click event on the board after win
       document.getElementById('board').style.pointerEvents = 'none';
       
-    } else if (gameDrawn(totalDrawnShapes)){
+    } 
+    else if (gameDrawn(totalDrawnShapes)){
       console.log("draw");
 
       // display draw message
@@ -306,7 +310,7 @@ function handleClick(e) {
 
 }
 
-/* istanbul ignore next */
+
 /**
  * Display a circle or a cross on a new canvas that is clicked
  * 
@@ -344,7 +348,7 @@ function addShape(canvas, currentShape){
   }
   // error handling in case the shape cannot be made
   else{
-    console.log("Invalid shape to draw");
+    //console.log("Invalid shape to draw");
     return 0;
   }
   
@@ -386,7 +390,7 @@ function gameWon(currentShape, canvasItems){
 function gameDrawn(totalDrawnShapes){
 
   // if all 9 canvases have been filled, the game is drawn
-  if(totalDrawnShapes == totalNeededShapes){
+  if(totalDrawnShapes == TOTALNEEDEDSHAPES){
     return true;
   }
   
@@ -423,7 +427,7 @@ module.exports ={ BoardSingleton, Shape, Cross, Circle, loadGame ,handleClick, a
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Fri Dec 02 2022 15:42:49 GMT-0700 (Mountain Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Sun Dec 04 2022 13:28:31 GMT-0700 (Mountain Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
