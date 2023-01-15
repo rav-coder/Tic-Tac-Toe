@@ -28,7 +28,7 @@ let totalDrawnShapes = 0;
 let crossCurrentShape
 
 /**
- * Holds the blueprint for board that needs a single instance.
+ * Holds the blueprint for a board that needs a single instance.
  */
 class BoardSingleton {
 
